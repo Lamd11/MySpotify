@@ -1,3 +1,9 @@
+require('dotenv').config();
+
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
+const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const playlistRoutes = require('./routes/playlistRoutes');
