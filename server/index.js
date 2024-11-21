@@ -1,12 +1,8 @@
-require('dotenv').config();
-
-const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
-const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
-
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const playlistRoutes = require('./routes/playlistRoutes');
+const spotifyRoutes = require('./routes/spotifyRoutes');
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,6 +12,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/playlist', playlistRoutes);
+app.use('/spotify', spotifyRoutes);
 
 // Root Endpoint
 app.get('/', (req, res) => {
