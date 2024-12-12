@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const playlistRoutes = require('./routes/playlistRoutes');
-const spotifyRoutes = require('./routes/spotifyRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 
 const app = express();
@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/playlist', playlistRoutes);
-app.use('/spotify', spotifyRoutes);
+app.use('/user', userRoutes);
 
 // Root
 app.get('/', (req, res) => {

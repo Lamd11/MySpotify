@@ -25,8 +25,25 @@ const getSpotifyToken = async () => {
         return response.data;
     } catch (error) {
         console.error('Error fetching Spotify Token:', error.response?.data || error.message);
-        throw new Error('Failed to retrieve Spotify token')
+        throw new Error('Failed to retrieve Spotify token');
     }
 }
+
+const getUserProfile = async () => {
+    try{
+        const token = await getSpotifyToken();
+        const accessToken = token.access_token;
+
+        const res = await axios.post('https://api.spotify.com/v1/me', data.toString(), {
+            headers: {
+                'Authorization' : `Bearer${accessToken}`,
+            }
+        });
+        res.json(res.data);
+    } catch (error) {
+        console.error('Error fetching User Profile:', error.response?.data || error.message);
+        throw new Error('Failed to retrieve User Profile');
+    }
+};
 
 module.exports = { getSpotifyToken };
