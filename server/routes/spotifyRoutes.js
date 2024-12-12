@@ -3,7 +3,7 @@ const { fetchSpotifyToken } = require('../controllers/spotifyController');
 
 const router = express.Router();
 
-// Route to fetch the Spotify token
+// Fetch Spotify Token
 router.get('/token', fetchSpotifyToken);
 
 module.exports = router;
