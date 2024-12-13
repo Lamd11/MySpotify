@@ -1,9 +1,8 @@
-const { getSpotifyToken, getUserProfile } = require('../models/userModel');
+const { getSpotifyToken, getUserProfile, getUserLogin } = require('../models/userModel');
 
 const fetchUserLogin = async (req,res) => {
     try{
-        const loginData = await getUserLogin();
-        res.json(loginData);
+        getUserLogin(req, res);
     }catch (error){
         res.status(500).json({error: error.message})
     }
@@ -12,8 +11,8 @@ const fetchUserLogin = async (req,res) => {
 // Controller to fetch and send the Spotify token 
 const fetchSpotifyToken = async (req, res) => {
     try{
-        const tokenData = await getSpotifyToken();
-        res.json(tokenData);
+        const data = await getSpotifyToken(req, res);
+        res.json(data)
     } catch (error){
         res.status(500).json({error: error.message});
     }
