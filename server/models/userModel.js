@@ -4,6 +4,21 @@ require('dotenv').config();
 
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
+
+const getUserLogin = async () => {
+    var state = generateRandomString(16);
+    var scope = 'user-read-private user-read-email';
+
+    res.redirect('https://accounts.spotify.com/authorize?' +
+        querystring.stringify({
+            response_type: 'code',
+            client_id: clientId,
+            scope: scope,
+            redirect_uri: redirectUri,
+            state: state
+        }));
+}
 
 const getSpotifyToken = async () => {
     try {
@@ -30,13 +45,13 @@ const getSpotifyToken = async () => {
 }
 
 const getUserProfile = async () => {
-    try{
+    try {
         const token = await getSpotifyToken();
         const accessToken = token.access_token;
 
         const res = await axios.post('https://api.spotify.com/v1/me', data.toString(), {
             headers: {
-                'Authorization' : `Bearer${accessToken}`,
+                'Authorization': `Bearer${accessToken}`,
             }
         });
         res.json(res.data);
@@ -46,4 +61,4 @@ const getUserProfile = async () => {
     }
 };
 
-module.exports = { getSpotifyToken };
+module.exports = { getUserLogin ,getSpotifyToken, getUserProfile };
